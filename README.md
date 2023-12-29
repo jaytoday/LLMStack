@@ -1,8 +1,8 @@
 <p align="center">
-  <a href="https://llmstack.ai"><img src="web/static/img/llmstack-logo-light-white-bg.svg" alt="LLMStack" width="500px"></a>
+  <a href="https://llmstack.ai"><img src="https://llmstack.ai/img/llmstack-logo-light-white-bg.svg" alt="LLMStack" width="500px"></a>
 </p>
 <p align="center">
-    <em>LLMStack is a no-code platform for building generative AI applications, chatbots, agents and connecting them to your data and business processes.</em>
+    <em>LLMStack is a no-code platform for building generative AI agents, workflows and chatbots, connecting them to your data and business processes.</em>
 </p>
 <p align="center">
     <a href="https://llmstack.ai/docs/getting-started/introduction#quickstart" target="_blank">Quickstart</a> | <a href="https://llmstack.ai/docs/" target="_blank">Documentation</a> | <a href="trypromptly.com" target="_blank">Promptly</a>
@@ -10,10 +10,10 @@
 
 ## Overview
 
-Build tailor-made generative AI applications, chatbots and agents that cater to your unique needs by chaining multiple LLMs. Seamlessly integrate your own data and GPT-powered models without any coding experience using LLMStack's no-code builder. Trigger your AI chains from Slack or Discord. Deploy to the cloud or on-premise.
-
+Build tailor-made generative AI agents, applications and chatbots that cater to your unique needs by chaining multiple LLMs. Seamlessly integrate your own data, internal tools and GPT-powered models without any coding experience using LLMStack's no-code builder. Trigger your AI chains from Slack or Discord. Deploy to the cloud or on-premise.
 
 ![llmstack-quickstart](https://github.com/trypromptly/LLMStack/assets/431988/72de45f5-23f9-4cd3-91b0-7d5ae97534c3)
+
 <p align="center">
   <em>See full demo video <a href="https://youtu.be/8icy1Ccs2lk" target="_blank">here</a></em>
 </p>
@@ -22,27 +22,31 @@ Build tailor-made generative AI applications, chatbots and agents that cater to 
 
 **_Check out our Cloud offering at [Promptly](https://trypromptly.com) or follow the instructions below to deploy LLMStack on your own infrastructure._**
 
-Clone this repository or download the latest release. Install [docker](https://docs.docker.com/engine/install/) if not already installed. Copy `.env.prod` to `.env` and update `SECRET_KEY`, `CIPHER_SALT` and `DATABASE_PASSWORD` in `.env` file:
-
-```
-cp .env.prod .env
-```
-
-Run LLMStack using the following command:
-
-```
-./run-llmstack.sh
-```
-
-> If you are on Windows, you can use `run-llmstack.bat` instead
-
-Once LLMStack is up and ready, it should automatically open your browser and point it to [localhost:3000](http://localhost:3000). You can also alternatively use `docker compose up` to manually start the containers and open [localhost:3000](http://localhost:3000) to login into the platform. Make sure to wait for the API server to be ready before trying to load LLMStack.
-
 LLMStack deployment comes with a default admin account whose credentials are `admin` and `promptly`. _Be sure to change the password from admin panel after logging in_.
 
-> Users of the platform can add their own keys to providers like OpenAI, Cohere, Stability etc., from Settings page. If you want to provide default keys for all the users of your LLMStack instance, you can add them to the `.env` file. Make sure to restart the containers after adding the keys.
+### Installation
 
-> Remember to update `POSTGRES_VOLUME`, `REDIS_VOLUME` and `WEAVIATE_VOLUME` in `.env` file if you want to persist data across container restarts.
+#### Prerequisites
+
+LLMStack depends on a background docker container to run jobs. Make sure you have Docker installed on your machine if want to use jobs. You can follow the instructions [here](https://docs.docker.com/get-docker/) to install Docker.
+
+#### Install LLMStack using `pip`
+
+```sh
+pip install llmstack
+```
+
+> If you are on windows, please use WSL2 (Windows Subsystem for Linux) to install LLMStack. You can follow the instructions [here](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to install WSL2. Once you are in a WSL2 terminal, you can install LLMStack using the above command.
+
+Start LLMStack using the following command:
+
+```sh
+llmstack
+```
+
+Above commands will install and start LLMStack. It will create `.llmstack` in your home directory and places the database and config files in it when run for the first time. Once LLMStack is up and running, it should automatically open your browser and point it to [localhost:3000](http://localhost:3000).
+
+> You can add your own keys to providers like OpenAI, Cohere, Stability etc., from Settings page. If you want to provide default keys for all the users of your LLMStack instance, you can add them to the `~/.llmstack/config` file.
 
 <div>
   <a href="https://www.loom.com/share/1399a39c19394d9cad224e2e62c15285">
@@ -54,6 +58,8 @@ LLMStack deployment comes with a default admin account whose credentials are `ad
 </div>
 
 ## Features
+
+**🤖 Agents**: Build generative AI agents like AI SDRs, Research Analysts, RPA Automations etc., **without writing any code**. Connect agents to your internal or external tools, search the web or browse the internet with agents.
 
 **🔗 Chain multiple models**: LLMStack allows you to chain multiple LLMs together to build complex generative AI applications.
 
@@ -70,6 +76,12 @@ LLMStack deployment comes with a default admin account whose credentials are `ad
 ## What can you build with LLMStack?
 
 Using LLMStack you can build a variety of generative AI applications, chatbots and agents. Here are some examples:
+
+**👩🏻‍💼 AI SDRs**: You can build AI SDRs (Sales Development Representatives) that can generate personalized emails, LinkedIn messages, cold calls, etc., for your sales team
+
+**👩🏻‍💻 Research Analysts**: You can build AI Research Analysts that can generate research reports, investment thesis, etc., for your investment team
+
+**🤖 RPA Automations**: You can build RPA automations that can automate your business processes by generating emails, filling forms, etc.,
 
 **📝 Text generation**: You can build apps that generate product descriptions, blog posts, news articles, tweets, emails, chat messages, etc., by using text generation models and optionally connecting your data. Check out this [marketing content generator](https://trypromptly.com/app/50ee8bae-712e-4b95-9254-74d7bcf3f0cb) for example
 
@@ -97,21 +109,20 @@ Check out our documentation at [llmstack.ai/docs](https://llmstack.ai/docs/) to 
 
 ## Development
 
-Run the following commands from the root of the repository to bring up the application containers in development mode. Make sure you have [docker](https://docs.docker.com/engine/install/) and [npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) installed on your system before running these commands.
-
 ```bash
 cd client
 npm install
 npm run build
 cd ..
-docker compose -f docker-compose.dev.yml --env-file .env.dev up --build
+pip install poetry
+poetry install
+poetry shell
+llmstack
 ```
-
-This will mount the source code into the containers and restart the containers on code changes. Update `.env.dev` as needed. Please note that LLMStack is available at [http://localhost:9000](http://localhost:9000) in development mode.
 
 > You can skip running `npm install` and `npm run build` if you have already built the client before
 
-For frontend development, you can use `npm start` to start the development server in client directory. You can also use `npm run build` to build the frontend and serve it from the backend server.
+For frontend development, you can use `REACT_APP_API_SERVER=localhost:3000 npm start` to start the development server in client directory. You can also use `npm run build` to build the frontend and serve it from the backend server.
 
 To update documentation, make changes to `web/docs` directory and run `npm run build` in web directory to build the documentation. You can use `npm start` in web directory to serve the documentation locally.
 

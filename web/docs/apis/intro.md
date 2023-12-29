@@ -3,7 +3,7 @@ id: introduction
 title: APIs
 ---
 
-LLMStack provides a set of APIs that you can use to access the functionality of LLMStack. You can use these APIs to run apps, endpoints and jobs, manage your data sources etc.,
+LLMStack provides a set of APIs that you can use to access the functionality of LLMStack. You can use these APIs to run apps, manage your data sources etc.,
 
 ## Authentication
 
@@ -11,7 +11,7 @@ All LLMStack APIs require authentication. You can authenticate using your API To
 
 ## Streaming Output
 
-For endpoint and app runs, if `stream` parameter is used, output is received in chunks of values for JSON keys. For example, if the output is a JSON object with keys `a`, `b` and `c`, you will receive the output in the following format:
+For app runs, if `stream` parameter is used, output is received in chunks of values for JSON keys. For example, if the output is a JSON object with keys `a`, `b` and `c`, you will receive the output in the following format:
 
 ```json
 {
@@ -25,32 +25,9 @@ You will need to parse the output in your client code and stitch the chunks toge
 
 ## API Reference
 
-### Endpoints
-
-:::warning
-Endpoints are going to be deprecated in the future releases. Please use [Apps](/docs/apps/introduction) instead.
-:::
-
-Run an endpoint.
-
-```bash
-POST /api/endpoints/<endpoint_uuid>
-```
-
-#### Request
-
-If the endpoint includes variables, you can pass the values for the variables in the request body. You can also pass `stream` parameter to stream the response.
-
-```json
-{
-  "template_values": <KEY_VALUE_JSON>,
-  "stream": <BOOLEAN>
-}
-```
-
 ### Apps
 
-Run an app.
+#### Run an app.
 
 ```bash
 POST /api/apps/<app_uuid>/run
@@ -64,7 +41,7 @@ POST /api/apps/<app_uuid>/run/<session_id>
 
 where `session_id` is a unique identifier for the session. You can use the same session id to run the app multiple times. If you don't pass a session id, LLMStack will generate a random session id for you.
 
-#### Request body
+##### Request body
 
 You can pass the values for the app's input variables in the request body. You can also pass `stream` parameter to stream the response.
 
@@ -75,7 +52,7 @@ You can pass the values for the app's input variables in the request body. You c
 }
 ```
 
-#### Response body
+##### Response body
 
 ```json
 {
@@ -84,6 +61,22 @@ You can pass the values for the app's input variables in the request body. You c
   },
   "output": <APP_OUTPUT>
 }
+```
+
+#### Create an App
+
+You can create an app by sending a POST request to `/api/apps` with the app definition as `YAML` in the request body. Make sure to set the `Content-Type` header to `application/yaml`.
+
+```bash
+POST /api/apps
+```
+
+#### Update an App
+
+You can update an app by sending a PATCH request to `/api/apps/<app_uuid>` with the app definition as `YAML` in the request body. Make sure to set the `Content-Type` header to `application/yaml`.
+
+```bash
+PATCH /api/apps/<app_uuid>
 ```
 
 ### Datasources

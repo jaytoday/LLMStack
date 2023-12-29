@@ -37,17 +37,14 @@ const sidebars = {
         "processors/openai",
         "processors/azure",
         "processors/google",
+        "processors/anthropic",
         "processors/cohere",
         "processors/stability",
         "processors/elevenlabs",
         "processors/localai",
+        "processors/linkedin",
+        "processors/juniper",
       ],
-    },
-    {
-      type: "category",
-      label: "Endpoints",
-      link: { type: "doc", id: "endpoints/introduction" },
-      items: [],
     },
     {
       type: "category",
@@ -56,6 +53,7 @@ const sidebars = {
       items: [
         "apps/types",
         "apps/builder",
+        "apps/yaml",
         "apps/variables",
         "apps/templates",
         "apps/sharing",
@@ -68,6 +66,7 @@ const sidebars = {
             "apps/integrations/api",
             "apps/integrations/discord",
             "apps/integrations/slack",
+            "apps/integrations/twilio",
             "apps/integrations/whatsapp",
           ],
         },
@@ -77,6 +76,18 @@ const sidebars = {
       type: "category",
       label: "Datasources",
       link: { type: "doc", id: "datasources/introduction" },
+      items: [],
+    },
+    {
+      type: "category",
+      label: "Connections",
+      link: { type: "doc", id: "connections/introduction" },
+      items: [],
+    },
+    {
+      type: "category",
+      label: "Jobs",
+      link: { type: "doc", id: "jobs/introduction" },
       items: [],
     },
     {
@@ -94,7 +105,11 @@ const sidebars = {
     {
       type: "category",
       label: "Guides",
-      items: ["guides/contributing"],
+      items: [
+        "guides/contributing",
+        "guides/add-custom-processor",
+        "guides/add-external-datasource",
+      ],
     },
     "promptly",
   ],
